@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movieapp/screens/movie_details_screen/movie_details_screen.dart';
 import 'package:movieapp/style/app_colors.dart';
 
 import '../style/theme_app.dart';
@@ -15,8 +16,11 @@ class RecomendedCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
-      child: Container(
+        onTap: () {
+          ///go to details screen
+          Navigator.of(context).pushNamed(MovieDetailsScreen.routeName);
+        },
+        child: Container(
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: AppColors.darkGrayColor,
