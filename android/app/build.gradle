@@ -7,6 +7,48 @@ plugins {
 
 android {
     namespace = "com.example.movieapp"
+    compileSdkVersion 33  // Replace with your desired compile SDK version
+    ndkVersion "21.1.6352462"  // Replace with your desired NDK version
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    defaultConfig {
+        applicationId "com.example.movieapp"
+        minSdkVersion 21  // Replace with your desired minimum SDK version
+        targetSdkVersion 33  // Replace with your desired target SDK version
+        versionCode 1  // Replace with your desired version code
+        versionName "1.0"  // Replace with your desired version name
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+//////////////////////////////////////////////
+/*
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.example.movieapp"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -42,3 +84,4 @@ android {
 flutter {
     source = "../.."
 }
+*/
