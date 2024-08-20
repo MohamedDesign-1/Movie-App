@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.4.3
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -41,6 +41,10 @@ dependencies:
   google_fonts: ^6.2.1
   # For making http requests
   http: ^1.2.2
+  # Package to make carousel slider
+  carousel_slider: ^5.0.0
+  # For caching images
+  cached_network_image: ^3.4.1
 
 
 
