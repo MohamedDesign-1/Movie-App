@@ -1,10 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color darkBgColor = Color(0xff121312);
-  static const Color blackColor = Colors.black;
   static const Color lightGrayColor = Color(0xffC6C6C6);
   static const Color mediumGrayColor = Color(0xffB5B4B4);
   static const Color darkGrayColor = Color(0xff282A28);
@@ -12,6 +9,7 @@ class AppColors {
   static const Color yellowColor = Color(0xffFFBB3B);
   static const Color dividerColor = Color(0xff707070);
   static const Gradient yellowGradientColor = LinearGradient(colors: [Color(0xffFFBB3B) , Color(0xffFFA90A)]);
+  static const Color grayColor = Color(0xff514F4F);
 }
 
 class TextColors{
