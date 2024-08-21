@@ -10,15 +10,60 @@ class RecomendedCarousel extends StatelessWidget {
   String image;
   String releaseDate;
   String voteAverage;
-  RecomendedCarousel({super.key , required this.title, required this.image, required this.releaseDate, required this.voteAverage});
 
+  int itemIndex;
+
+  RecomendedCarousel(
+      {super.key,
+      required this.title,
+      required this.image,
+      required this.releaseDate,
+      required this.voteAverage,
+      /*required this.snapshot,*/ required this.itemIndex});
+
+  //final AsyncSnapshot snapshot;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () {
+          Navigator.of(context).pushNamed(
+            MovieDetailsScreen.routeName,
+            arguments: itemIndex,
+          );
+
+          /*
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MovieDetailsScreen(
+                      movie: snapshot.data[itemIndex],
+          ),
+          ),
+          );
+
+           */
+          /*
           ///go to details screen
           Navigator.of(context).pushNamed(MovieDetailsScreen.routeName);
+          */
+          /*
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+            builder: (context) => MovieDetailsScreen(),
+             //builder: (context) => MovieDetailsScreen(movie: selectedMovie)
+            ),
+          );
+
+           */
+/*
+          Navigator.pushNamed(
+            context,
+            MovieDetailsScreen.routeName,
+            //arguments: selectedMovie,
+          );
+*/
         },
         child: Container(
         padding: EdgeInsets.all(8),

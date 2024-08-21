@@ -7,13 +7,27 @@ class PopularCarouselWidget extends StatelessWidget {
   String image;
   String title;
   String releaseDate;
-  PopularCarouselWidget({required this.title,required this.image, required this.releaseDate,});
+
+  int itemIndex;
+
+  PopularCarouselWidget(
+      {required this.title,
+      required this.image,
+      required this.releaseDate,
+      required this.itemIndex});
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        Navigator.of(context).pushNamed(
+          MovieDetailsScreen.routeName,
+          arguments: itemIndex,
+        );
+
+        /*
         ///go to details screen
         Navigator.of(context).pushNamed(MovieDetailsScreen.routeName);
+         */
       },
       child: Stack(
         children: [

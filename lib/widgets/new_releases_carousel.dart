@@ -10,17 +10,27 @@ class NewReleasesCarousel extends StatelessWidget {
   String title;
   String releaseDate;
 
+  int itemIndex;
+
   NewReleasesCarousel({
     required this.image,
     required this.title,
     required this.releaseDate,
+    required this.itemIndex,
   });
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        Navigator.of(context).pushNamed(
+          MovieDetailsScreen.routeName,
+          arguments: itemIndex,
+        );
+
+        /*
         ///go to details screen
         Navigator.of(context).pushNamed(MovieDetailsScreen.routeName);
+         */
       },
       child: Container(
         padding: EdgeInsets.all(8),

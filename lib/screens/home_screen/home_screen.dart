@@ -9,6 +9,8 @@ import 'package:movieapp/widgets/recomended_carousel.dart';
 class HomeScreen extends StatefulWidget {
   static const String routeName = "HomeScreen";
 
+  //Late int itemIndex
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -37,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       title: snapshot.data!.results![index].title!,
                       image: snapshot.data!.results![index].posterPath!,
                       releaseDate: snapshot.data!.results![index].releaseDate!,
+                      itemIndex: snapshot.data!.results![index].id as int,
                     ),
                     options: CarouselOptions(
                       scrollPhysics: BouncingScrollPhysics(),
@@ -90,6 +93,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               image: snapshot.data!.results![index].posterPath!,
                               releaseDate:
                                   snapshot.data!.results![index].releaseDate!,
+                              itemIndex:
+                                  snapshot.data!.results![index].id as int,
                             ),
                           ),
                           options: CarouselOptions(
@@ -137,6 +142,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               voteAverage: snapshot
                                   .data!.results![index].voteAverage
                                   .toString(),
+                              //snapshot: snapshot,
+                              itemIndex:
+                                  snapshot.data!.results![index].id as int,
                             ),
                           ),
                           options: CarouselOptions(
