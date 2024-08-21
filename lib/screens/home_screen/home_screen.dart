@@ -91,10 +91,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: NewReleasesCarousel(
                               title: snapshot.data!.results![index].title!,
                               image: snapshot.data!.results![index].posterPath!,
-                              releaseDate:
-                                  snapshot.data!.results![index].releaseDate!,
-                              itemIndex:
-                                  snapshot.data!.results![index].id as int,
+                              releaseDate: snapshot.data!.results![index].releaseDate!,
+                              itemIndex: snapshot.data!.results![index].id as int,
                             ),
                           ),
                           options: CarouselOptions(
@@ -139,12 +137,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               image: snapshot.data!.results![index].posterPath!,
                               releaseDate:
                                   snapshot.data!.results![index].releaseDate!,
-                              voteAverage: snapshot
-                                  .data!.results![index].voteAverage
-                                  .toString(),
+                              voteAverage: snapshot.data!.results![index].voteAverage.toString(),
                               //snapshot: snapshot,
-                              itemIndex:
-                                  snapshot.data!.results![index].id as int,
+                              itemIndex: snapshot.data!.results![index].id as int,
                             ),
                           ),
                           options: CarouselOptions(
