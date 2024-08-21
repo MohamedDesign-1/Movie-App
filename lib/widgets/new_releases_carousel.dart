@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movieapp/screens/movie_details_screen/movie_details_screen.dart';
 
 import '../style/app_colors.dart';
 import '../style/theme_app.dart';
@@ -9,15 +10,28 @@ class NewReleasesCarousel extends StatelessWidget {
   String title;
   String releaseDate;
 
+  int itemIndex;
+
   NewReleasesCarousel({
     required this.image,
     required this.title,
     required this.releaseDate,
+    required this.itemIndex,
   });
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          MovieDetailsScreen.routeName,
+          arguments: itemIndex,
+        );
+
+        /*
+        ///go to details screen
+        Navigator.of(context).pushNamed(MovieDetailsScreen.routeName);
+         */
+      },
       child: Container(
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
