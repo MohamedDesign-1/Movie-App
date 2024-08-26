@@ -100,4 +100,20 @@ static Future<List<Genres>> getMovieCategories() async {
       return [];
     }
   }
+
+  final String apiKey =
+      'f7474590cf96104300cb755512a6f060'; // Replace with your TMDb API key
+  final String baseUrl = 'https://api.themoviedb.org/3';
+
+  Future<List<dynamic>> searchMovies(String query) async {
+    final response = await http
+        .get(Uri.parse('$baseUrl/search/movie?api_key=$apiKey&query=$query'));
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data['results'];
+    } else {
+      throw Exception('Failed to load movies');
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movieapp/screens/browse_screen/browse_screen.dart';
 import 'package:movieapp/screens/home_screen/home_screen.dart';
-import 'package:movieapp/screens/search_screen/search_screen.dart';
+import 'package:movieapp/screens/search_screen/search_screen/search_screen.dart';
 import 'package:movieapp/screens/watchlist_screen/watch_list_screen.dart';
 
 class MainPage extends StatefulWidget {
