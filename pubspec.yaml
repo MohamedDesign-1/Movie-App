@@ -45,6 +45,8 @@ dependencies:
   carousel_slider: ^5.0.0
   # For caching images
   cached_network_image: ^3.4.1
+  # for time
+  intl: ^0.19.0
 
 
 
@@ -73,6 +75,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/images/not_found.png
     - assets/images/stamp listview.png
   #   - images/a_dot_ham.jpeg
 
