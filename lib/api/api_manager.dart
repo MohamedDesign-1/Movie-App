@@ -7,9 +7,9 @@ import 'package:movieapp/models/movies_model.dart';
 import 'api_constatnts.dart';
 
 class ApiManger {
-
-static Future<MovieModel?> getPopularMovies() async {
-    Uri url = Uri.https(ApiConstatnts.baseUrl, ApiConstatnts.popularMoviesUrl, {'api_key': ApiConstatnts.apiKey});
+  static Future<MovieModel?> getPopularMovies() async {
+    Uri url = Uri.https(ApiConstatnts.baseUrl, ApiConstatnts.popularMoviesUrl,
+        {'api_key': ApiConstatnts.apiKey});
     try {
       var response = await http.get(url);
       return MovieModel.fromJson(jsonDecode(response.body));
@@ -18,8 +18,9 @@ static Future<MovieModel?> getPopularMovies() async {
     }
   }
 
-static Future<MovieModel?> getUpcomingMovies() async {
-    Uri url = Uri.https(ApiConstatnts.baseUrl, ApiConstatnts.upcomingMoviesUrl, {'api_key': ApiConstatnts.apiKey});
+  static Future<MovieModel?> getUpcomingMovies() async {
+    Uri url = Uri.https(ApiConstatnts.baseUrl, ApiConstatnts.upcomingMoviesUrl,
+        {'api_key': ApiConstatnts.apiKey});
     try {
       var response = await http.get(url);
       return MovieModel.fromJson(jsonDecode(response.body));
@@ -28,8 +29,9 @@ static Future<MovieModel?> getUpcomingMovies() async {
     }
   }
 
-static Future<MovieModel?> getTopRatedMovies() async {
-    Uri url = Uri.https(ApiConstatnts.baseUrl, ApiConstatnts.topRatedMoviesUrl, {'api_key': ApiConstatnts.apiKey});
+  static Future<MovieModel?> getTopRatedMovies() async {
+    Uri url = Uri.https(ApiConstatnts.baseUrl, ApiConstatnts.topRatedMoviesUrl,
+        {'api_key': ApiConstatnts.apiKey});
     try {
       var response = await http.get(url);
       return MovieModel.fromJson(jsonDecode(response.body));
@@ -37,23 +39,6 @@ static Future<MovieModel?> getTopRatedMovies() async {
       rethrow;
     }
   }
-
-static Future<List<Genres>> getMovieCategories() async {
-  Uri url = Uri.https(ApiConstatnts.baseUrl, ApiConstatnts.movieCategoriesUrl, {'api_key': ApiConstatnts.apiKey});
-  try {
-    var response = await http.get(url);
-    var jsonData = jsonDecode(response.body);
-
-    if (jsonData['genres'] != null) {
-      return List<Genres>.from(jsonData['genres'].map((x) => Genres.fromJson(x)));
-    } else {
-      return [];
-    }
-  } catch (e) {
-    rethrow;
-  }
-}
-
 
 /*=======================================================================================*/
   static Future<MoviesDetailsModel?> getMovieDetails(int id) async {
@@ -101,10 +86,12 @@ static Future<List<Genres>> getMovieCategories() async {
     }
   }
 
+//---------------------------------------------
   final String apiKey =
       'f7474590cf96104300cb755512a6f060'; // Replace with your TMDb API key
   final String baseUrl = 'https://api.themoviedb.org/3';
 
+//-------------------------------------------------------------
   Future<List<dynamic>> searchMovies(String query) async {
     final response = await http
         .get(Uri.parse('$baseUrl/search/movie?api_key=$apiKey&query=$query'));
@@ -115,5 +102,48 @@ static Future<List<Genres>> getMovieCategories() async {
     } else {
       throw Exception('Failed to load movies');
     }
+  }
+
+  static const String _apiKey = ApiConstatnts.apiKey;
+  static const String _baseUrl = 'https://api.themoviedb.org/3';
+  static const String _imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
+
+  Future<List<dynamic>> fetchCategories() async {
+    final url = '$_baseUrl/genre/movie/list?api_key=$_apiKey&language=en-US';
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return data['genres'];
+    } else {
+      throw Exception('Failed to load categories');
+    }
+  }
+
+  Future<List<dynamic>> fetchMoviesByGenre(int genreId) async {
+    final url =
+        '$_baseUrl/discover/movie?api_key=$_apiKey&with_genres=$genreId';
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return data['results'];
+    } else {
+      throw Exception('Failed to load movies');
+    }
+  }
+
+  Future<String> fetchCategoryImage(int genreId) async {
+    final url =
+        '$_baseUrl/discover/movie?api_key=$_apiKey&with_genres=$genreId&sort_by=popularity.desc';
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      if (data['results'].isNotEmpty) {
+        return '$_imageBaseUrl${data['results'][0]['poster_path']}';
+      }
+    }
+    return '';
   }
 }
