@@ -38,6 +38,23 @@ static Future<MovieModel?> getTopRatedMovies() async {
     }
   }
 
+static Future<List<Genres>> getMovieCategories() async {
+  Uri url = Uri.https(ApiConstatnts.baseUrl, ApiConstatnts.movieCategoriesUrl, {'api_key': ApiConstatnts.apiKey});
+  try {
+    var response = await http.get(url);
+    var jsonData = jsonDecode(response.body);
+
+    if (jsonData['genres'] != null) {
+      return List<Genres>.from(jsonData['genres'].map((x) => Genres.fromJson(x)));
+    } else {
+      return [];
+    }
+  } catch (e) {
+    rethrow;
+  }
+}
+
+
 /*=======================================================================================*/
   static Future<MoviesDetailsModel?> getMovieDetails(int id) async {
     // Replace the movie_id part in the path, not in the query parameters
