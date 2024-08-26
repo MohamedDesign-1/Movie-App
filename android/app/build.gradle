@@ -3,11 +3,12 @@ plugins {
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
+    //id "com.google.gms.google-services"
 }
 
 android {
     namespace = "com.example.movieapp"
-    compileSdkVersion 33  // Replace with your desired compile SDK version
+    compileSdkVersion 34  // Replace with your desired compile SDK version
     ndkVersion "21.1.6352462"  // Replace with your desired NDK version
 
     compileOptions {
@@ -22,7 +23,7 @@ android {
     defaultConfig {
         applicationId "com.example.movieapp"
         minSdkVersion 21  // Replace with your desired minimum SDK version
-        targetSdkVersion 33  // Replace with your desired target SDK version
+        targetSdkVersion 34  // Replace with your desired target SDK version
         versionCode 1  // Replace with your desired version code
         versionName "1.0"  // Replace with your desired version name
     }
@@ -37,7 +38,11 @@ android {
 flutter {
     source = "../.."
 }
-
+//dependencies {
+//    // Import the Firebase BoM
+//    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+//    implementation("com.google.firebase:firebase-analytics")
+//}
 //////////////////////////////////////////////
 /*
 plugins {
