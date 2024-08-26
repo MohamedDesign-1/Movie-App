@@ -5,6 +5,9 @@ import 'app_colors.dart';
 class AppTheme{
 static final ThemeData mainTheme = ThemeData(
   scaffoldBackgroundColor: AppColors.darkBgColor,
+  appBarTheme: AppBarTheme(
+    backgroundColor: AppColors.darkBgColor,
+  ),
   textTheme: TextTheme(
     titleLarge: GoogleFonts.cairo(
       color: TextColors.textLightColor,
@@ -22,12 +25,12 @@ static final ThemeData mainTheme = ThemeData(
       fontWeight: FontWeight.bold,
     ),
     bodyMedium: GoogleFonts.cairo(
-      color: TextColors.textMediumGrayColor,
+      color: TextColors.textLightColor,
       fontSize: 16,
       fontWeight: FontWeight.normal,
     ),
     bodySmall: GoogleFonts.cairo(
-      color: TextColors.textLightColor,
+      color: TextColors.textMediumGrayColor,
       fontSize: 14,
       fontWeight: FontWeight.normal,
     ),
@@ -37,8 +40,6 @@ static final ThemeData mainTheme = ThemeData(
     backgroundColor: AppColors.darkGrayColor,
     selectedItemColor: AppColors.yellowGradientColor.colors[0],
     unselectedItemColor: AppColors.lightGrayColor,
-
-
   ),
 );
 }
