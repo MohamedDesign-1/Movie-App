@@ -1,23 +1,66 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:movieapp/models/movie.dart';
+import 'package:movieapp/screens/movie_details_screen/movie_details_screen.dart';
 import 'package:movieapp/style/app_colors.dart';
 
 import '../style/theme_app.dart';
 
-class RecomendedCarousel extends StatelessWidget {
-  String title;
-  String image;
-  String releaseDate;
-  String voteAverage;
-  RecomendedCarousel({super.key , required this.title, required this.image, required this.releaseDate, required this.voteAverage});
 
+class RecomendedCarousel extends StatefulWidget {
+  final String title;
+  final String image;
+  final String releaseDate;
+  final String voteAverage;
+  final int itemIndex;
+
+  RecomendedCarousel({
+    Key? key,
+    required this.title,
+    required this.image,
+    required this.releaseDate,
+    required this.voteAverage,
+    required this.itemIndex,
+  }) : super(key: key);
+
+  @override
+  _RecomendedCarouselState createState() => _RecomendedCarouselState();
+}
+
+class _RecomendedCarouselState extends State<RecomendedCarousel> {
+  late Box<Movie> watchListBox;
+  bool isInWatchList = false;
+
+  @override
+  void initState() {
+    super.initState();
+    watchListBox = Hive.box<Movie>('watch_list_movies');
+    isInWatchList = watchListBox.containsKey(widget.itemIndex);
+  }
+
+  void toggleWatchList(Movie movie) {
+    setState(() {
+      if (isInWatchList) {
+        watchListBox.delete(movie.id);
+      } else {
+        watchListBox.put(movie.id, movie);
+      }
+      isInWatchList = !isInWatchList;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          MovieDetailsScreen.routeName,
+          arguments: widget.itemIndex,
+        );
+      },
       child: Container(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: AppColors.darkGrayColor,
           borderRadius: BorderRadius.circular(16),
@@ -26,40 +69,64 @@ class RecomendedCarousel extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Stack(
-              children:[
+              children: [
                 ClipRRect(
-                clipBehavior: Clip.antiAlias,
-                borderRadius: BorderRadius.circular(16),
-                child: CachedNetworkImage(
-                  imageUrl: 'https://image.tmdb.org/t/p/w500$image',
-                  placeholder: (context, url) => const Center(child: CircularProgressIndicator(
-                    color: AppColors.whiteColor,
-                  )),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  clipBehavior: Clip.antiAlias,
+                  borderRadius: BorderRadius.circular(16),
+                  child: CachedNetworkImage(
+                    imageUrl: 'https://image.tmdb.org/t/p/w500${widget.image}',
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.whiteColor,
+                      ),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
                 Positioned(
                   top: 1,
                   right: 1,
-                  child: IconButton(onPressed: (){}, icon: Icon(Icons.favorite_border, color: AppColors.whiteColor,))
+                  child: IconButton(
+                    onPressed: () {
+                      Movie movie = Movie(
+                        id: widget.itemIndex,
+                        title: widget.title,
+                        posterPath: widget.image,
+                        overview:
+                            'Movie Name : ${widget.title} \n Release Date ${widget.releaseDate}',
+                      );
+                      toggleWatchList(movie);
+                    },
+                    icon: Icon(
+                      isInWatchList ? Icons.favorite : Icons.favorite_border,
+                      color: AppColors.whiteColor,
+                    ),
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: 8,),
-            Text(title, style: AppTheme.mainTheme.textTheme.titleLarge!.copyWith(fontSize: 18), overflow: TextOverflow.ellipsis, maxLines: 2,),
+            const SizedBox(height: 8),
+            Text(
+              widget.title,
+              style: AppTheme.mainTheme.textTheme.titleLarge!
+                  .copyWith(fontSize: 18),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+            ),
             Row(
               children: [
-                Text(releaseDate, style: AppTheme.mainTheme.textTheme.bodySmall,),
+                Text(widget.releaseDate,
+                    style: AppTheme.mainTheme.textTheme.bodySmall),
                 const Spacer(),
-                Text(voteAverage, style: AppTheme.mainTheme.textTheme.bodySmall,),
-                Icon(Icons.star, color: AppColors.yellowColor,),
-
+                Text(widget.voteAverage,
+                    style: AppTheme.mainTheme.textTheme.bodySmall),
+                const Icon(Icons.star, color: AppColors.yellowColor),
               ],
-            )
+            ),
           ],
-
         ),
-      )
+      ),
     );
   }
 }

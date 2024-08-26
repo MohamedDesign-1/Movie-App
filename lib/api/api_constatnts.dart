@@ -4,4 +4,8 @@ class ApiConstatnts {
   static const String upcomingMoviesUrl = '/3/movie/upcoming';
   static const String topRatedMoviesUrl = '/3/movie/upcoming';
   static const String apiKey = 'f8e0cb8cdd871033ce44cfeac6f5107e';
+
+/*=======================================================================================*/
+  //static const String movieDetailsUrl = '/3/movie/{movie_id}';
+  //static const String movieSimilarUrl = '/3/movie/{movie_id}/similar';
 }
