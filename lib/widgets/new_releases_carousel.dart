@@ -106,10 +106,10 @@ class _NewReleasesCarouselState extends State<NewReleasesCarousel> {
             SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             Text(
               widget.title,
-              style: AppTheme.mainTheme.textTheme.titleLarge!
-                  .copyWith(fontSize: 18),
+              style: AppTheme.mainTheme.textTheme.titleMedium!
+                  .copyWith(color: AppColors.lightGrayColor, fontSize: 18),
               overflow: TextOverflow.ellipsis,
-              maxLines: 2,
+              maxLines: 1,
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.001),
             Text(widget.releaseDate,
