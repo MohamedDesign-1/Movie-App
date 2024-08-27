@@ -52,6 +52,7 @@ class PopularCarouselWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
+                  maxLines: 1,
                   title,
                   style: AppTheme.mainTheme.textTheme.titleLarge,
                 ),

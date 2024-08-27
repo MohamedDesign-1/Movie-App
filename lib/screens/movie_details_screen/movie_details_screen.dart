@@ -60,11 +60,14 @@ class MovieDetailsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                /// Top Image
-                Container(
+                // Top Image
+
+                Column(
+                  children: [
+                    Container(
                   width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  child: Image.network(
+                      height: MediaQuery.of(context).size.height * 0.35,
+                      child: Image.network(
                     'https://image.tmdb.org/t/p/w500${movieDetails.backdropPath}',
                     fit: BoxFit.cover,
                   ),
@@ -81,10 +84,14 @@ class MovieDetailsScreen extends StatelessWidget {
                       SizedBox(
                         width: MediaQuery.of(context).size.height * 0.16,
                         height: MediaQuery.of(context).size.height * 0.3,
-                        child: Image.network(
-                          'https://image.tmdb.org/t/p/w500${movieDetails.posterPath}',
-                          fit: BoxFit.cover,
-                        ),
+                            child: ClipRRect(
+                              clipBehavior: Clip.antiAlias,
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(
+                                'https://image.tmdb.org/t/p/w500${movieDetails.posterPath}',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                       ),
                       SizedBox(width: MediaQuery.of(context).size.width * 0.05),
                       // Movie Details on the right
@@ -117,17 +124,17 @@ class MovieDetailsScreen extends StatelessWidget {
                                   child: Text(
                                     movieDetails.genres!
                                         .map((genre) => genre.name)
-                                        .join(', '),
-                                    style: TextStyle(fontSize: 16),
-                                    overflow: TextOverflow.ellipsis,
+                                            .join(' ,\n '),
+                                        style: TextStyle(fontSize: 15),
+                                        overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                               ],
                             ),
                             SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.01),
-                            // Release Date and Runtime
+                                height: MediaQuery.of(context).size.height *
+                                        0.03),
+                                // Release Date and Runtime
                             Text('Release Date: ${movieDetails.releaseDate}'),
                             Text('Runtime: ${movieDetails.runtime} min'),
                             SizedBox(
@@ -142,8 +149,8 @@ class MovieDetailsScreen extends StatelessWidget {
                             SizedBox(
                                 height:
                                     MediaQuery.of(context).size.height * 0.01),
-                            Text('${movieDetails.overview}'),
-                          ],
+                                Text(maxLines: 5, '${movieDetails.overview}'),
+                              ],
                         ),
                       ),
                     ],
@@ -158,9 +165,9 @@ class MovieDetailsScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
 
-                /// Similar Movies
+                    /// Similar Movies
                 FutureBuilder<List<MoviesDetailsModel>>(
                   future: fetchSimilarMovies(movieId),
                   builder: (context, similarMoviesSnapshot) {
@@ -187,12 +194,20 @@ class MovieDetailsScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(right: 8.0),
                             child: Column(
                               children: [
-                                Image.network(
-                                  'https://image.tmdb.org/t/p/w500${similarMovie.posterPath}',
-                                  width: 100,
-                                  height: 150,
-                                  fit: BoxFit.cover,
-                                ),
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.of(context).pushNamed(
+                                          MovieDetailsScreen.routeName,
+                                          arguments: similarMovie.id,
+                                        );
+                                      },
+                                      child: Image.network(
+                                        'https://image.tmdb.org/t/p/w500${similarMovie.posterPath}',
+                                        width: 100,
+                                        height: 150,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
                                 SizedBox(
                                     height: MediaQuery.of(context).size.height *
                                         0.01),
@@ -209,8 +224,8 @@ class MovieDetailsScreen extends StatelessWidget {
                   },
                 ),
               ],
-            ),
-          );
+                ),
+              ]));
         },
       ),
     );
