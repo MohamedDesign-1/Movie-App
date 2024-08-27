@@ -194,12 +194,20 @@ class MovieDetailsScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(right: 8.0),
                             child: Column(
                               children: [
-                                Image.network(
-                                  'https://image.tmdb.org/t/p/w500${similarMovie.posterPath}',
-                                  width: 100,
-                                  height: 150,
-                                  fit: BoxFit.cover,
-                                ),
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.of(context).pushNamed(
+                                          MovieDetailsScreen.routeName,
+                                          arguments: similarMovie.id,
+                                        );
+                                      },
+                                      child: Image.network(
+                                        'https://image.tmdb.org/t/p/w500${similarMovie.posterPath}',
+                                        width: 100,
+                                        height: 150,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
                                 SizedBox(
                                     height: MediaQuery.of(context).size.height *
                                         0.01),

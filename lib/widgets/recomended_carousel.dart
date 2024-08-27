@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:movieapp/models/movie.dart';
 import 'package:movieapp/screens/movie_details_screen/movie_details_screen.dart';
 import 'package:movieapp/style/app_colors.dart';
@@ -31,7 +32,7 @@ class RecomendedCarousel extends StatefulWidget {
 class _RecomendedCarouselState extends State<RecomendedCarousel> {
   late Box<Movie> watchListBox;
   bool isInWatchList = false;
-
+  final df = new DateFormat('y');
   @override
   void initState() {
     super.initState();
@@ -116,11 +117,14 @@ class _RecomendedCarouselState extends State<RecomendedCarousel> {
             ),
             Row(
               children: [
-                Text(widget.releaseDate,
+                Text(df.format(DateTime.parse(widget.releaseDate)),
                     style: AppTheme.mainTheme.textTheme.bodySmall),
                 const Spacer(),
                 Text(widget.voteAverage,
                     style: AppTheme.mainTheme.textTheme.bodySmall),
+                SizedBox(
+                  width: 5,
+                ),
                 const Icon(Icons.star, color: AppColors.yellowColor),
               ],
             ),

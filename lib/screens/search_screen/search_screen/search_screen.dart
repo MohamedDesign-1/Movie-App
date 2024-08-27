@@ -125,10 +125,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                     clipBehavior: Clip.antiAlias,
                                     borderRadius: BorderRadius.circular(8),
                                     child: Image.network(
-                                      'https://image.tmdb.org/t/p/w500${movie['backdrop_path']}',
+                                      'https://image.tmdb.org/t/p/w500${movie['poster_path']}',
                                       height: 50,
                                       width: 50,
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.fill,
                                     ),
                                   ),
                                 ),
