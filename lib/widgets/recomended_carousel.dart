@@ -109,10 +109,10 @@ class _RecomendedCarouselState extends State<RecomendedCarousel> {
             const SizedBox(height: 8),
             Text(
               widget.title,
-              style: AppTheme.mainTheme.textTheme.titleLarge!
-                  .copyWith(fontSize: 18),
+              style: AppTheme.mainTheme.textTheme.titleMedium!
+                  .copyWith(color: AppColors.lightGrayColor, fontSize: 18),
               overflow: TextOverflow.ellipsis,
-              maxLines: 2,
+              maxLines: 1,
             ),
             Row(
               children: [

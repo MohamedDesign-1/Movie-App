@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'app_colors.dart';
 
 class AppTheme{
@@ -9,8 +10,8 @@ static final ThemeData mainTheme = ThemeData(
     backgroundColor: AppColors.darkBgColor,
   ),
   textTheme: TextTheme(
-    titleLarge: GoogleFonts.cairo(
-      color: TextColors.textLightColor,
+      titleLarge: GoogleFonts.nerkoOne(
+        color: TextColors.textLightColor,
       fontSize: 24,
       fontWeight: FontWeight.bold,
     ),
